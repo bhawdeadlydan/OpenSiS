@@ -60,13 +60,21 @@ sleep 5
 
 # Install PHP v5.5
 echo "Installing PHP v5.5..."
-sudo yum --enablerepo=remi,remi-php56 install -y php-fpm php-mysql php-pear php-cli php-mcrypt php-gd php-mssql php-pgsql php-mbstring php-xml
+sudo yum --enablerepo=remi,remi-php56 install -y php libapache2-mod-php php-fpm php-mysql php-pear php-cli php-mcrypt php-gd php-mssql php-pgsql php-mbstring php-xml
 sleep 3
 
 # Install git and unzip
 echo "Installing git for developer"
 sudo yum install -y git unzip
 sleep 3
+
+# Install OpenSiS 
+wget https://excellmedia.dl.sourceforge.net/project/opensis-ce/opensis6.4.zip
+unzip opensis6.4.zip
+sudo cp -R  ~/opensis /var/www/
+chmod -R  777 /var/www/opensis/
+chown -R www-data:www-data /var/www/opensis
+
 
 # Install NodeJS v0.10.26for environment
 echo "Installing Nodejs v0.10.26..."
@@ -87,6 +95,4 @@ sudo service httpd restart
 
 sudo chkconfig --levels 235 httpd on
 sudo chkconfig --levels 235 mysqld on
-
-
-
+# Setup is complete...
